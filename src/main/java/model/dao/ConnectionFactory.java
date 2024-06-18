@@ -16,14 +16,14 @@ public class ConnectionFactory {
     private ConnectionFactory() {}
 
     static {
-
+        // Does not work if generating a jar file
         try (InputStream input = new FileInputStream("resources/db.properties")) {
             Properties properties = new Properties();
             properties.load(input);
 
             String connection_url = properties.getProperty("CONNECTION_URL");
-            String user = properties.getProperty("");
-            String pass = properties.getProperty("");
+            String user = properties.getProperty("LOGIN_USER");
+            String pass = properties.getProperty("LOGIN_PASS");
 
             connection = DriverManager.getConnection(connection_url, user, pass);
         } catch (IOException | SQLException e) {
