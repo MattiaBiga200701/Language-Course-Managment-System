@@ -4,6 +4,7 @@ import exception.DAOException;
 import model.dao.ConnectionFactory;
 import model.dao.CourseInsertionDAO;
 import model.dao.LessonInsertionDAO;
+import model.dao.ReportTeacherActivitiesDAO;
 import model.domain.Course;
 import model.domain.Lesson;
 import model.domain.Role;
@@ -32,6 +33,7 @@ public class AmministrazioneController implements Controller {
             switch(choice) {
                 case 1 -> this.courseInsertion();
                 case 2 -> this.lessonInsertion();
+                case 3 -> this.report();
                 case 4 -> System.exit(0);
                 default -> throw new RuntimeException("Invalid choice");
             }
@@ -67,5 +69,15 @@ public class AmministrazioneController implements Controller {
             throw new RuntimeException(e);
         }
         AmministrazioneView.showNewLesson(newLesson);
+    }
+
+    public void report(){
+        ReportTeacherActivitiesDAO dao = new ReportTeacherActivitiesDAO();
+
+        try{
+            dao.execute();
+        }catch(DAOException e){
+            throw new RuntimeException(e);
+        }
     }
 }
