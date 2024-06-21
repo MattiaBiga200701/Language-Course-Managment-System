@@ -2,7 +2,9 @@ package view;
 
 import model.domain.Course;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -32,9 +34,9 @@ public class AmministrazioneView {
         return choice;
     }
 
-    public static Course getCourseInformation(){
+    public static Course getCourseInformation() throws IOException{
 
-        Scanner input = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String codiceInterno;
         String nomeLiv;
         String dataAtt;
@@ -42,13 +44,13 @@ public class AmministrazioneView {
 
         while (newCourse == null){
             System.out.print("\nEnter CourseID: ");
-            codiceInterno = input.next();
+            codiceInterno = reader.readLine();
 
             System.out.print("Enter Activation Date: ");
-            dataAtt = input.next();
+            dataAtt = reader.readLine();
 
             System.out.print("Enter Course Level: ");
-            nomeLiv = input.next();
+            nomeLiv = reader.readLine();
 
             try{
                newCourse = new Course(codiceInterno, nomeLiv, dataAtt );
@@ -58,5 +60,15 @@ public class AmministrazioneView {
         }
         System.out.println();
         return newCourse;
+    }
+
+    public static void showNewCourse(Course newCourse){
+
+        String codiceInterno = newCourse.getCodiceInterno();
+        String nomeLiv = newCourse.getNomeLiv();
+        String dataAtt = newCourse.getDataAtt();
+
+        System.out.println("Course " + codiceInterno + " " + nomeLiv + " " + dataAtt + " entered correctly.\n" );
+
     }
 }

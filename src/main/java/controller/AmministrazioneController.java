@@ -1,6 +1,8 @@
 package controller;
 
+import exception.DAOException;
 import model.dao.ConnectionFactory;
+import model.dao.CourseInsertionDAO;
 import model.domain.Course;
 import model.domain.Role;
 import view.AmministrazioneView;
@@ -35,6 +37,16 @@ public class AmministrazioneController implements Controller {
 
     public void courseInsertion(){
 
-        Course newCourse = AmministrazioneView.getCourseInformation();
+        CourseInsertionDAO dao = new CourseInsertionDAO();
+        Course newCourse;
+        try{
+
+            newCourse = AmministrazioneView.getCourseInformation();
+            newCourse = dao.execute(newCourse);
+
+        }catch(DAOException | IOException e){
+            throw new RuntimeException(e);
+        }
+        AmministrazioneView.showNewCourse(newCourse);
     }
 }
