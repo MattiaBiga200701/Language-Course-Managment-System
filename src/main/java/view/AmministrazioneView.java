@@ -1,6 +1,8 @@
 package view;
 
+import exception.TimeFormatException;
 import model.domain.Course;
+import model.domain.Lesson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,5 +72,58 @@ public class AmministrazioneView {
 
         System.out.println("Course " + codiceInterno + " " + nomeLiv + " " + dataAtt + " entered correctly.\n" );
 
+    }
+
+    public static Lesson getLessonInformation() throws IOException{
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String dataLez;
+        String ora;
+        String codiceInterno;
+        String nomeIns;
+        String cognomeIns;
+        Lesson newLesson = null;
+
+        while(newLesson == null){
+
+            System.out.print("\nEnter lesson date: ");
+            dataLez = reader.readLine();
+
+            System.out.print("Enter lesson time: ");
+            ora = reader.readLine();
+
+            System.out.print("Enter CourseID: ");
+            codiceInterno = reader.readLine();
+
+
+            System.out.print("Enter Teacher's name: ");
+            nomeIns = reader.readLine();
+
+            System.out.print("Enter Teacher's surname: ");
+            cognomeIns = reader.readLine();
+
+            try{
+                newLesson = new Lesson(dataLez, ora, codiceInterno, null, nomeIns, cognomeIns);
+            }catch(DateTimeParseException e){
+                System.out.println("Date Format error retype with this format [yyy-MM-dd]");
+            }catch(TimeFormatException e){
+                System.out.println("Time Format error retype with this format [HH:MM:SS]");
+            }
+
+        }
+        System.out.println();
+        return newLesson;
+    }
+
+    public static void showNewLesson(Lesson newLesson){
+
+        String dataLez = newLesson.getDataLez();
+        String ora = newLesson.getOra();
+        String codiceInterno = newLesson.getCodiceCorso();
+        String nomeLiv = newLesson.getNomeLiv();
+        String nomeIns = newLesson.getNomeIns();
+        String cognomeIns = newLesson.getCognomeIns();
+
+        System.out.println("Lesson " + dataLez + " " + ora + " " + codiceInterno + " " + nomeLiv + " " + nomeIns + " " + cognomeIns + " entered correctly.\n");
     }
 }
