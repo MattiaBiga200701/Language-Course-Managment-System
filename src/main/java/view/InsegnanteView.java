@@ -1,10 +1,13 @@
 package view;
 
+import exception.TimeFormatException;
+import model.domain.Attendance;
 import model.domain.Teacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class InsegnanteView {
@@ -53,5 +56,46 @@ public class InsegnanteView {
         System.out.println();
         return reportTeacher;
 
+    }
+
+
+    public static Attendance getAttendanceInformation() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String studente;
+        String dataLez;
+        String oraLez;
+        Attendance newAttendance = null;
+        while(newAttendance == null) {
+
+            System.out.print("\nEnter student id: ");
+            studente =reader.readLine();
+
+            System.out.print("Entern lesson's date: ");
+             dataLez = reader.readLine();
+
+            System.out.print("Enter lesson time: ");
+            oraLez = reader.readLine();
+
+            try {
+                newAttendance = new Attendance(studente, dataLez, oraLez, null, null);
+            }catch(DateTimeParseException e){
+                System.out.println("Date Format error retype with this format [yyy-MM-dd]");
+            }catch(TimeFormatException e){
+                System.out.println("Time Format error retype with this format [HH:MM:SS]");
+            }
+        }
+        System.out.println();
+        return newAttendance;
+    }
+
+    public static void showNewAttendance(Attendance newAttendance){
+
+        String studente = newAttendance.getStudente();
+        String dataLez = newAttendance.getDataLez();
+        String oraLez = newAttendance.getOraLez();
+        String codiceCorso = newAttendance.getCodiceCorso();
+        String nomeLiv = newAttendance.getNomeLiv();
+
+        System.out.println("Attendance " + studente + " " + dataLez + " " + oraLez + " " + codiceCorso + " " + nomeLiv + " entered correctly");
     }
 }
