@@ -33,7 +33,7 @@ public class Lesson {
 
     public void setDataLez(String dataLez) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dataLez, formatter);
+        LocalDate.parse(dataLez, formatter);
         this.dataLez = dataLez;
     }
 

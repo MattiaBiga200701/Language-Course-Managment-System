@@ -27,7 +27,7 @@ public class Course {
     public void setDataAtt(String dataAtt) throws DateTimeParseException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dataAtt, formatter);
+        LocalDate.parse(dataAtt, formatter);
         this.dataAtt = dataAtt;
 
     }

@@ -3,6 +3,7 @@ package view;
 import exception.TimeFormatException;
 import model.domain.Course;
 import model.domain.Lesson;
+import model.domain.Teacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,8 +19,9 @@ public class AmministrazioneView {
         System.out.println("*** What should I do for you? ***\n");
         System.out.println("1) Course Insertion");
         System.out.println("2) Lessons Insertion");
-        System.out.println("3) Teacher Activities Report");
-        System.out.println("4) Quit");
+        System.out.println("3) Teacher Insertion");
+        System.out.println("4) Teacher Activities Report");
+        System.out.println("5) Quit");
 
 
         Scanner input = new Scanner(System.in);
@@ -27,7 +29,7 @@ public class AmministrazioneView {
         while (true) {
             System.out.print("Please enter your choice: ");
             choice = input.nextInt();
-            if (choice >= 1 && choice <= 4) {
+            if (choice >= 1 && choice <= 5) {
                 break;
             }
             System.out.println("Invalid option");
@@ -125,5 +127,43 @@ public class AmministrazioneView {
         String cognomeIns = newLesson.getCognomeIns();
 
         System.out.println("Lesson " + dataLez + " " + ora + " " + codiceInterno + " " + nomeLiv + " " + nomeIns + " " + cognomeIns + " entered correctly.\n");
+    }
+
+    public static Teacher getTeacherInformation() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String nome;
+        String cognome;
+        String nazione;
+        String indirizzoRes;
+        Teacher newTeacher = null;
+
+        while(newTeacher == null){
+
+            System.out.print("\nEnter Teacher's name: ");
+            nome = reader.readLine();
+
+            System.out.print("Enter Teacher's surname: ");
+            cognome = reader.readLine();
+
+            System.out.print("Enter Teacher's Country: ");
+            nazione = reader.readLine();
+
+            System.out.print("Enter Teacher's residence address: ");
+            indirizzoRes = reader.readLine();
+            newTeacher = new Teacher(nome, cognome, nazione, indirizzoRes);
+        }
+
+        return newTeacher;
+    }
+
+    public static void showNewTeacher(Teacher newTeacher){
+
+        String nome = newTeacher.getNome();
+        String cognome = newTeacher.getCognome();
+        String nazione = newTeacher.getNazione();
+        String indirizzoRes = newTeacher.getIndirizzoRes();
+
+        System.out.println("Teacher " + nome + " " + cognome + " " + nazione + " " + indirizzoRes + " entered correctly.\n");
+
     }
 }
