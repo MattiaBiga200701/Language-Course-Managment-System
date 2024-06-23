@@ -16,7 +16,7 @@ public class AttendanceInsertionDAO implements GenericProcedureDAO<Attendance> {
         String studente = newAttendance.getStudente();
         String dataLez = newAttendance.getDataLez();
         String oraLez = newAttendance.getOraLez();
-        String codiceCorso;
+        String codiceCorso = newAttendance.getCodiceCorso();
         String nomeLiv;
 
         try{
@@ -25,10 +25,9 @@ public class AttendanceInsertionDAO implements GenericProcedureDAO<Attendance> {
             cs.setString(1,studente);
             cs.setString(2,dataLez);
             cs.setString(3, oraLez);
-            cs.registerOutParameter(4, Types.VARCHAR);
+            cs.setString(4, codiceCorso);
             cs.registerOutParameter(5, Types.VARCHAR);
             cs.executeQuery();
-            codiceCorso = cs.getString(4);
             nomeLiv = cs.getString(5);
         }catch(SQLException e){
             throw new DAOException("Attendance insertion error: " + e.getMessage());

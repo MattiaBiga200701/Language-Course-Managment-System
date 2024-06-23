@@ -59,7 +59,7 @@ public class AmministrazioneView {
             try{
                newCourse = new Course(codiceInterno, nomeLiv, dataAtt );
             }catch(DateTimeParseException e){
-                System.out.println("Date Format yyy-MM-dd");
+                System.out.println("Date Format error retype with this format [yyy-MM-dd]");
             }
         }
         System.out.println();

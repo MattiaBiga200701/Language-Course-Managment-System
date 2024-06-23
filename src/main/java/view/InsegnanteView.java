@@ -61,9 +61,10 @@ public class InsegnanteView {
 
     public static Attendance getAttendanceInformation() throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String studente;
-        String dataLez;
-        String oraLez;
+        String studente = null;
+        String dataLez = null;
+        String oraLez = null;
+        String codiceCorso = null;
         Attendance newAttendance = null;
         while(newAttendance == null) {
 
@@ -76,8 +77,10 @@ public class InsegnanteView {
             System.out.print("Enter lesson time: ");
             oraLez = reader.readLine();
 
+            System.out.print("Enter CourseID: ");
+            codiceCorso = reader.readLine();
             try {
-                newAttendance = new Attendance(studente, dataLez, oraLez, null, null);
+                newAttendance = new Attendance(studente, dataLez, oraLez, codiceCorso, null);
             }catch(DateTimeParseException e){
                 System.out.println("Date Format error retype with this format [yyy-MM-dd]");
             }catch(TimeFormatException e){
@@ -96,6 +99,6 @@ public class InsegnanteView {
         String codiceCorso = newAttendance.getCodiceCorso();
         String nomeLiv = newAttendance.getNomeLiv();
 
-        System.out.println("Attendance " + studente + " " + dataLez + " " + oraLez + " " + codiceCorso + " " + nomeLiv + " entered correctly");
+        System.out.println("Attendance " + studente + " " + dataLez + " " + oraLez + " " + codiceCorso + " " + nomeLiv + " entered correctly\n");
     }
 }
