@@ -2,6 +2,7 @@ package view;
 
 import exception.TimeFormatException;
 import model.domain.Attendance;
+import model.domain.Student;
 import model.domain.Teacher;
 
 import java.io.BufferedReader;
@@ -100,5 +101,19 @@ public class InsegnanteView {
         String nomeLiv = newAttendance.getNomeLiv();
 
         System.out.println("Attendance " + studente + " " + dataLez + " " + oraLez + " " + codiceCorso + " " + nomeLiv + " entered correctly\n");
+    }
+
+    public static String getCFStudent() throws IOException{
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String CF = null;
+        while(CF == null){
+
+            System.out.print("\nEnter student id: ");
+            CF = reader.readLine();
+        }
+
+        return CF;
+
     }
 }

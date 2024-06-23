@@ -1,6 +1,7 @@
 package controller;
 
 import exception.DAOException;
+import model.dao.AbsenceListDAO;
 import model.dao.AttendanceInsertionDAO;
 import model.dao.ConnectionFactory;
 import model.dao.ReportAgendaDAO;
@@ -33,6 +34,7 @@ public class InsegnanteController implements Controller {
             switch(choice) {
                 case 1 -> this.reportAgenda();
                 case 2 -> this.attendanceInsertion();
+                case 3 -> this.absenceList();
                 case 4 -> System.exit(0);
                 default -> throw new RuntimeException("Invalid choice");
             }
@@ -65,5 +67,16 @@ public class InsegnanteController implements Controller {
         }
 
         InsegnanteView.showNewAttendance(newAttendance);
+    }
+
+    public void absenceList(){
+        AbsenceListDAO dao = new AbsenceListDAO();
+        String CF;
+        try{
+            CF = InsegnanteView.getCFStudent();
+            dao.execute(CF);
+        }catch(DAOException | IOException e){
+            throw new RuntimeException(e);
+        }
     }
 }
